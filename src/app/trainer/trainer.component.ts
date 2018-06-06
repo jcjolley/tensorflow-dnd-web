@@ -24,7 +24,6 @@ export class TrainerComponent implements OnInit {
   handleClick(chosenClass) {
     this.aiService.matches.push([this.statMap, [chosenClass.toLowerCase()]]);
     this.randomizeStats();
-    Swal(`${chosenClass} chosen`, '', 'success');
   }
 
   randomizeStats() {
