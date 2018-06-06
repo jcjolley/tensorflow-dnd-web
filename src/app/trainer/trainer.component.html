@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1>DnD Classifier</h1>
+  </div>
+
+  <h2 class="m-3">Pick the best class for these stats</h2>
+  <div class="row">
+    <div class="col-4 card">
+      <div class="row">
+        <div *ngFor="let stat of stats; let i = index;">
+          <div class="row my-3">
+            <div class="col-2">
+              <label>{{stat | uppercase}}</label>
+            </div>
+            <div class="col-5">
+              <input type="number" class="form-control" [(ngModel)]="statMap[stat]">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-secondary mx-3 float-right" (click)="randomizeStats()">Skip</button>
+          <button *ngIf="showPredict" class="btn btn-secondary mx-3 float-right" (click)="getPrediction()">Predict</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-8 card">
+      <div class="row">
+        <div class="col-4" *ngFor="let class of classes">
+          <button class="btn btn-primary btn-lg m-3" (click)="handleClick(class)">{{class | titlecase}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col my-5">
+      <h3>Trained matches: {{aiService.matches.length}}</h3>
+    </div>
+    <div class="col">
+      <button class="btn btn-danger btn-lg my-5 float-right" [disabled]="aiService.matches.length < 5" title="Choose at least 5 matches"
+        (click)="getPredictionFn()">Training Complete</button>
+    </div>
+  </div>
+</div>
